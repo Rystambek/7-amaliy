@@ -1,4 +1,4 @@
-package com.example.kamaro
+package com.example.rustam_7
 
 import io.flutter.embedding.android.FlutterActivity
 

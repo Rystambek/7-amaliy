@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,12 +20,25 @@ class AddTaskScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
+              controller: _titleController,
               decoration: InputDecoration(labelText: 'Task Title'),
+            ),
+            TextField(
+              controller: _dateController,
+              decoration: InputDecoration(labelText: 'Task Date'),
             ),
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                final title = _titleController.text;
+                final date = _dateController.text;
+
+                if (title.isNotEmpty && date.isNotEmpty) {
+                  Navigator.of(context).pop({
+                    'title': title,
+                    'date': date,
+                  });
+                }
               },
               child: Text('Add Task'),
             ),
